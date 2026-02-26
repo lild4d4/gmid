@@ -77,7 +77,9 @@ class GridInterpolator:
             X, Y = np.meshgrid(x_vals, y_vals)
             return np.dstack((X, Y)).reshape(-1, 2)
         else:
-            return np.array([[x_value, y_value]])
+            X, Y = np.meshgrid(x_value, y_value)
+            points = np.column_stack([X.ravel(), Y.ravel()])
+            return points
 # >>>
 
 # kdtree interpolate <<<
