@@ -159,7 +159,21 @@ def extract_2d_table(
             data = data.T
         extracted_table[p] = data
 
-    for var in ["length", "vbs", "vgs", "vds"]:
+    for var in ["length", "vbs"]:
         extracted_table[var], _ = tile_arrays(values_dict[var], extracted_table[reference_key])
+    
+    # vgs y vds necesitan meshgrid explícito
+    vgs_vals = values_dict["vgs"]  # shape (101,)
+    vds_vals = values_dict["vds"]  # shape (101,)
+    
+    if vgs_vals.ndim == 1 and vds_vals.ndim == 1:
+        # indexing='ij' → filas varían con vgs, columnas con vds
+        # esto debe coincidir con el orden (VGS, VDS) del array 4D simulado
+        VGS, VDS = np.meshgrid(vgs_vals, vds_vals, indexing='ij')
+        extracted_table["vgs"] = VGS  # shape (101, 101), varía por filas
+        extracted_table["vds"] = VDS  # shape (101, 101), varía por columnas
+    else:
+        extracted_table["vgs"], _ = tile_arrays(vgs_vals, extracted_table[reference_key])
+        extracted_table["vds"], _ = tile_arrays(vds_vals, extracted_table[reference_key])
 
     return secondary, filter_values, extracted_table
