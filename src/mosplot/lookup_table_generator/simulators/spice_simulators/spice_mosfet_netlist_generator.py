@@ -30,7 +30,7 @@ class SpiceMosfetNetlistGenerator:
             "VGS NG 0 DC=0",
             f"VBS NB 0 DC={vbs}",
             "VDS ND 0 DC=0",
-            f"{self.mos_spice_symbols[0]} ND NG 0 NB {mosfet_model} L={length} {parameters}",
+            f"{self.mos_spice_symbols[0]} ND NG 0 NB {mosfet_model} l={length} {parameters}",
         ])
         if self.raw_spice:
             netlist.extend(self.raw_spice)
