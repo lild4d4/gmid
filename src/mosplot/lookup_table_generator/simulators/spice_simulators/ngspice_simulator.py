@@ -93,7 +93,7 @@ class NgspiceSimulator(BaseSimulator):
             osdi,
             "\n".join([val[0] for val in self.parameter_table.values()]),
             analysis_string,
-            f"let i_vds = {polarity}i(vds)",
+            f"let i_vds = abs(i(vds))",
             f"write {self.output_file_path} all",
             ".endc",
             ".end",
