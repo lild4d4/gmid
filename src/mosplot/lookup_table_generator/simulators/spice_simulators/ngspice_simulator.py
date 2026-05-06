@@ -20,7 +20,7 @@ class NgspiceSimulator(BaseSimulator):
         simulator_path="ngspice",
         mos_spice_symbols=("m1", "m1"),
         device_parameters={"w": 10e-6},
-        parameters_to_save=["weff", "id", "vth", "vdsat", "vdssat", "gm", "gmbs", "gds", "cgg", "cgs", "cgb", "cgd", "cdd"],
+        parameters_to_save=["weff", "id", "vth", "vdsat", "vdssat", "vsat", "gm", "gmbs", "gds", "cgg", "cgs", "cgb", "cgd", "cdd"],
     ):
         super().__init__(
                 raw_spice=raw_spice,
@@ -69,6 +69,7 @@ class NgspiceSimulator(BaseSimulator):
             "vth":    [f"save @{symbol}[vth]",    f"v(@{symbol}[vth])"],
             "vdsat":  [f"save @{symbol}[vdsat]",  f"v(@{symbol}[vdsat])"],
             "vdssat": [f"save @{symbol}[vdssat]", f"v(@{symbol}[vdssat])"],
+            "vsat":   [f"save @{symbol}[vsat]",   f"v(@{symbol}[vsat])"],
             "gm":     [f"save @{symbol}[gm]",     f"@{symbol}[gm]"],
             "gmbs":   [f"save @{symbol}[gmbs]",   f"@{symbol}[gmbs]"],
             "gds":    [f"save @{symbol}[gds]",    f"@{symbol}[gds]"],

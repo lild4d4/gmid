@@ -88,8 +88,10 @@ class Mosfet:
         # Some models use vdssat instead of vdsat.
         if "vdssat" in self.parameters:
             self.vdsat_expression   = Expression(variables=["vdssat"],   label="$V_{\\mathrm{DS_{\\mathrm{SAT}}}}\\ (V)$")
-        else:
+        elif "vdsat" in self.parameters:
             self.vdsat_expression   = Expression(variables=["vdsat"],   label="$V_{\\mathrm{DS_{\\mathrm{SAT}}}}\\ (V)$")
+        elif "vsat" in self.parameters:
+            self.vdsat_expression   = Expression(variables=["vsat"],   label="$V_{\\mathrm{DS_{\\mathrm{SAT}}}}\\ (V)$")
 
         ########################################
         #         Computed Expressions         #
